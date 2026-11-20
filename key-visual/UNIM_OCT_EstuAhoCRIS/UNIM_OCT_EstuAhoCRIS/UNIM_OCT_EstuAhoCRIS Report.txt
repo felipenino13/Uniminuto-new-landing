@@ -1,0 +1,150 @@
+Package Report
+
+-----------------------------------------------------------------------------
+Document:
+Name: UNIM_OCT_EstuAhoCRIS.ai
+Color Mode: RGB color
+Color Profile: sRGB IEC61966-2.1
+Ruler Units: pixels
+Artboard Dimensions: 1920 px x 1080 px
+Show Images in Outline Mode: OFF
+Highlight Substituted Fonts: OFF
+Highlight Substituted Glyphs: OFF
+Preserve Text Editability
+Simulate Colored Paper: OFF
+
+-----------------------------------------------------------------------------
+Spot Color Objects:
+
+-----------------------------------------------------------------------------
+Missing Fonts:NONE
+
+-----------------------------------------------------------------------------
+Protected Fonts that were not packaged:NONE
+
+-----------------------------------------------------------------------------
+Fonts:
+WWDigital (TrueType)
+Montserrat Regular (TrueType)
+Montserrat SemiBold (TrueType)
+Montserrat Bold (TrueType)
+Montserrat Bold Italic (TrueType)
+Montserrat ExtraBold (TrueType)
+
+-----------------------------------------------------------------------------
+Embedded Fonts:
+NONE
+
+-----------------------------------------------------------------------------
+Missing Links:
+NONE
+
+-----------------------------------------------------------------------------
+Linked Images:
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Caminata futurista entre fragmentos digitales.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 4609K, 941 by 1672 pixels
+Dimensions: 1188,979 by 2112,618 points 
+Resolution: 56,983 by 56,983 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Abogado atravesando una explosion digital.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 15531K, 2664 by 1990 pixels
+Dimensions: 2885,662 by 2155,581 points 
+Resolution: 66,469 by 66,469 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Ingeniero del futuro entre fragmentos digitales.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 4609K, 941 by 1672 pixels
+Dimensions: 1188,979 by 2112,618 points 
+Resolution: 56,983 by 56,983 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Profesional digital atravesando datos holograficos.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 8544K, 1592 by 1832 pixels
+Dimensions: 1232,777 by 1418,623 points 
+Resolution: 92,98 by 92,98 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Abogado atravesando una explosion digital.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 15531K, 2664 by 1990 pixels
+Dimensions: 2664 by 1990 points 
+Resolution: 72 by 72 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Innovacion digital bajo casco amarillo.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 11672K, 2176 by 1831 pixels
+Dimensions: 1509,004 by 1269,755 points 
+Resolution: 103,825 by 103,825 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Explosion Digital del Exito.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 4604K, 940 by 1672 pixels
+Dimensions: 1134,055 by 2017,169 points 
+Resolution: 59,68 by 59,68 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Avance entre datos y tecnologia.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 10206K, 1929 by 1806 pixels
+Dimensions: 2016,652 by 1888,063 points 
+Resolution: 68,871 by 68,871 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Abogado atravesando una explosion digital.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 15531K, 2664 by 1990 pixels
+Dimensions: 2974,483 by 2221,93 points 
+Resolution: 64,484 by 64,484 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Innovacion digital bajo casco amarillo.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 11672K, 2176 by 1831 pixels
+Dimensions: 2366,12 by 1990,977 points 
+Resolution: 66,215 by 66,215 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Visionario entre fragmentos digitales.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 11987K, 2242 by 1825 pixels
+Dimensions: 2142,205 by 1743,766 points 
+Resolution: 75,354 by 75,354 pixels per inch
+
+
+/Users/andnar597/Library/CloudStorage/OneDrive-BunjiLLC/2026/UNIMINUTO/10 OCT/UNIM conceptos_Carpeta/Links/Visionario entre fragmentos digitales.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 11987K, 2242 by 1825 pixels
+Dimensions: 1547,698 by 1259,834 points 
+Resolution: 104,299 by 104,299 pixels per inch

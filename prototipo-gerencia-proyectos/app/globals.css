@@ -1,0 +1,136 @@
+@layer theme, base, legacy, components, utilities;
+@import "tailwindcss";
+@import "./landing-original.css" layer(legacy);
+@import "./campana-v02.css" layer(components);
+
+@font-face {
+  font-family: Montserrat;
+  src: url("/landing/montserrat.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Font Awesome Solid";
+  src: url("/landing/fa-solid-900.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+}
+
+@layer components {
+  .contenedor-nav {
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .navbar {
+    padding-block: 8px;
+  }
+
+  .navbar .contenedor-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-inline: 12px;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 8px;
+  }
+
+  .navbar-toggler {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgb(255 255 255 / 15%);
+    border-radius: 6px;
+    padding: 5px 12px;
+  }
+
+  .navbar-toggler-icon {
+    display: block;
+    width: 23px;
+    height: 17px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 60%) 0 2px,
+      transparent 2px 7.5px
+    );
+  }
+
+  .fas {
+    font: 900 1em/1 "Font Awesome Solid";
+  }
+
+  .fa-trophy::before {
+    content: "\f091";
+  }
+  .fa-clock::before {
+    content: "\f017";
+  }
+  .fa-laptop::before {
+    content: "\f109";
+  }
+  .fa-calendar::before {
+    content: "\f133";
+  }
+  .fa-book::before {
+    content: "\f02d";
+  }
+  .fa-shield::before {
+    content: "\f132";
+  }
+  .fa-divide::before {
+    content: "\f529";
+  }
+  .fa-heartbeat::before {
+    content: "\f21e";
+  }
+  .fa-chart-line::before {
+    content: "\f201";
+  }
+  .fa-network-wired::before {
+    content: "\f6ff";
+  }
+  .fa-store::before {
+    content: "\f54e";
+  }
+
+  @media (min-width: 576px) {
+    .contenedor-nav {
+      max-width: 540px;
+    }
+  }
+  @media (min-width: 768px) {
+    .contenedor-nav {
+      max-width: 720px;
+    }
+  }
+  @media (min-width: 992px) {
+    .contenedor-nav {
+      max-width: 960px;
+    }
+    .navbar-toggler {
+      display: none;
+    }
+  }
+  @media (min-width: 1200px) {
+    .contenedor-nav {
+      max-width: 1140px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .contenedor-nav {
+      max-width: 1320px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .navbar .logoUNI {
+      max-width: min(70%, 339px);
+    }
+  }
+}

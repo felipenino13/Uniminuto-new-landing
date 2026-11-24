@@ -254,13 +254,6 @@
   line-height: 1.55;
 }
 
-.landing-v02 .columna-derecha-formacion {
-  overflow: hidden;
-  border: 1px solid #81b2fa57;
-  border-radius: 1.25rem;
-  background: radial-gradient(ellipse, #2366bd, #0b1b36 73%);
-}
-
 .landing-v02 .columna-derecha-formacion img {
   width: 100%;
   margin: 0;

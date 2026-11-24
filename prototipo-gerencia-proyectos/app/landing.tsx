@@ -722,7 +722,19 @@ export function Landing({ version }: { version: "base" | "v02" }) {
           </div>
         </section>
 
-        <section className="seccion-formacion">
+        <section className={v02 ? "seccion-formacion relative isolate" : "seccion-formacion"}>
+          {v02 && (
+            <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+              <Image
+                src="/landing/fondo-formacion-v02.png"
+                alt=""
+                fill
+                sizes="100vw"
+                className="object-cover object-right"
+              />
+              <div className="absolute inset-0 bg-[#050c22]/25 max-sm:bg-[#050c22]/55" />
+            </div>
+          )}
           <div className="columna-formacion-izquierda">
             <h2 className="titulo-formacion">
               Formación recargada, para que vayas más allá

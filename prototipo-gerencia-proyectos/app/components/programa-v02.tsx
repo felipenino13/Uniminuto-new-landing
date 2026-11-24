@@ -29,7 +29,7 @@ const pasos = [
 ];
 
 const pdf = "https://www.uniminuto.edu/sites/default/files/programas/2025-07/Maestr%C3%ADa%20en%20gerencia%20de%20proyectos%20Uniminuto.pdf";
-const enlacePrincipal = "inline-flex min-h-11 items-center rounded-lg bg-[#09152e] px-4 py-2 text-sm font-bold text-white hover:bg-[#114fa9]";
+const estiloEnlace = "mt-5 inline-flex min-h-11 items-center rounded-lg px-4 py-2 text-sm font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#114fa9]";
 
 export function ProgramaV02() {
   const [activa, setActiva] = useState(0);
@@ -115,7 +115,7 @@ export function ProgramaV02() {
                 className="h-auto w-full rounded-xl"
               />
             </div>
-            <a href={pdf} target="_blank" rel="noopener noreferrer" className={`mt-5 ${enlacePrincipal}`}>
+            <a href={pdf} target="_blank" rel="noopener noreferrer" className={`${estiloEnlace} border border-[#09152e] bg-transparent text-[#09152e] hover:bg-[#edf5ff]`}>
               Abrir plan de estudios (PDF)
             </a>
           </div>
@@ -137,7 +137,7 @@ export function ProgramaV02() {
                 </li>
               ))}
             </ol>
-            <a href="#formPrograma" className={`mt-5 ${enlacePrincipal}`}>Solicitar información</a>
+            <a href="#formPrograma" className={`${estiloEnlace} bg-[#09152e] text-white hover:bg-[#114fa9]`}>Solicitar información</a>
           </div>
         </div>
       </div>

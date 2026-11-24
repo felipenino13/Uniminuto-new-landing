@@ -1,41 +1,81 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import { Formulario } from "./components/formulario";
+import { ProgramaV02 } from "./components/programa-v02";
+import { AccionesFlotantesV02 } from "./components/acciones-flotantes-v02";
 import {
+  anchoContenidoV02,
   BeneficiosV02,
   CabeceraProgramaV02,
   FichaProgramaV02,
+  MatriculaSubsidiadaV02,
   NavegacionV02,
 } from "./components/contenido-v02";
 
-const planDeEstudios =
-  "https://www.uniminuto.edu/sites/default/files/programas/2025-07/Maestr%C3%ADa%20en%20gerencia%20de%20proyectos%20Uniminuto.pdf";
-
 const imagenCampana = "/landing/imagen-programa-campana.png";
 
-export function Landing({ version }: { version: "base" | "v02" }) {
-  const v02 = version === "v02";
+function FranjaInscripcion({ conEnlace = false }: { conEnlace?: boolean }) {
+  const llamado = "inscríbete hoy y da un paso hacia el futuro!";
+
   return (
-    <>
-      <div
-        id={v02 ? "inicio" : undefined}
-        className={
-          v02
-            ? "bg-[#ffdd33] max-[800px]:[&_.top-bar]:px-4 max-[800px]:[&_.top-bar]:py-2 max-[800px]:[&_.top-bar-text]:text-center max-[800px]:[&_.top-bar-text]:text-xs"
-            : "bg-[#ffdd33]"
-        }
-      >
-        <div className="contenedor-nav top-bar">
-          <p className={v02 ? "top-bar-text w-auto text-center font-mono uppercase" : "top-bar-text"}>
-            ¡No dejes pasar esta oportunidad,{" "}
-            <span className="font-bold">
-              inscríbete hoy y da un paso hacia el futuro!
-            </span>
-          </p>
+    <div className="bg-[#ffdd33]">
+      <div className={conEnlace ? `top-bar max-[800px]:py-2 ${anchoContenidoV02}` : "contenedor-nav top-bar"}>
+        <p className={conEnlace ? "top-bar-text w-auto text-center font-mono uppercase max-[800px]:text-xs" : "top-bar-text"}>
+          ¡No dejes pasar esta oportunidad,{" "}
+          {conEnlace ? (
+            <a href="#formPrograma" className="font-bold underline decoration-2 underline-offset-4">
+              {llamado}
+            </a>
+          ) : (
+            <span className="font-bold">{llamado}</span>
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function PlanDeEstudiosBase() {
+  return (
+    <section className="seccion-plan">
+      <div className="columna-plan-izquierda">
+        <h2 className="titulo-plan">Conoce tu plan de estudios</h2>
+        <p className="parrafo-plan">
+          Explora un programa diseñado para la ejecución efectiva de grandes
+          ideas.
+          <span className="font-semibold">
+            Estudiarás liderazgo, gestión de riesgos, metodologías ágiles,
+            finanzas y dirección de equipos.
+          </span>{" "}
+          Desde el inicio, te formarás en lo que realmente hace que un
+          proyecto avance.
+        </p>
+        <div className="boton-contenedor-plan">
+          {" "}
+          <span className="boton-plan">Plan de estudios</span>{" "}
         </div>
       </div>
 
-      <nav className={v02 ? "navbar border-b border-[#69aaff]/30 bg-[#050e26]" : "navbar border-b-[3px] border-[#ffdd33] bg-[#182643]"}>
-        <div className="contenedor-nav">
+      <div className="columna-derecha-plan">
+        <img
+          width="100%"
+          src="/landing/imagen-plan-estudios.png"
+          alt="Imagen principal"
+        />
+      </div>
+    </section>
+  );
+}
+
+export function Landing({ version }: { version: "base" | "v02" }) {
+  const v02 = version === "v02";
+  const EnfasisTestimonio = v02 ? "b" : Fragment;
+  return (
+    <>
+      {!v02 && <FranjaInscripcion />}
+
+      <nav id={v02 ? "inicio" : undefined} tabIndex={v02 ? -1 : undefined} className={v02 ? "navbar border-b border-[#69aaff]/30 bg-[#050e26]" : "navbar border-b-[3px] border-[#ffdd33] bg-[#182643]"}>
+        <div className={v02 ? `contenedor-nav ${anchoContenidoV02}` : "contenedor-nav"}>
           <img
             className={v02 ? "logoUNI min-[1200px]:w-[245px] min-[1400px]:w-[339px]" : "logoUNI"}
             src="/landing/logo-uniminuto.png"
@@ -83,11 +123,11 @@ export function Landing({ version }: { version: "base" | "v02" }) {
       </nav>
 
       <main>
-        <section className={v02 ? "seccion-banner cabecera-campana" : "seccion-banner"}>
+        <section id={v02 ? "banner-v02" : undefined} className={v02 ? "seccion-banner cabecera-campana" : "seccion-banner"}>
           <section
             className={
               v02
-                ? "contenido-banner relative pb-8 max-[800px]:pt-6 min-[1200px]:grid min-[1200px]:max-w-[1520px] min-[1200px]:grid-cols-[minmax(0,1.32fr)_minmax(0,0.7fr)_minmax(0,1fr)] min-[1200px]:gap-5 min-[1200px]:px-8 min-[1200px]:pt-12 min-[1200px]:pb-14"
+                ? `contenido-banner relative pb-8 max-[800px]:pt-6 min-[801px]:gap-5 min-[1200px]:grid min-[1200px]:grid-cols-[minmax(0,1.32fr)_minmax(0,0.7fr)_minmax(0,1fr)] min-[1200px]:pt-12 min-[1200px]:pb-14 ${anchoContenidoV02}`
                 : "contenido-banner"
             }
           >
@@ -163,7 +203,7 @@ export function Landing({ version }: { version: "base" | "v02" }) {
               id="formPrograma"
               className={
                 v02
-                  ? "columna-derecha-banner scroll-mt-5 rounded-lg shadow-[0_16px_48px_#020817b0] ring-1 ring-blue-200/25 min-[1200px]:w-full min-[1200px]:min-w-0"
+                  ? "columna-derecha-banner scroll-mt-5 rounded-lg shadow-[0_16px_48px_#020817b0] ring-1 ring-blue-200/25 min-[1200px]:w-full min-[1200px]:min-w-0 min-[1200px]:justify-self-end"
                   : "columna-derecha-banner"
               }
               tabIndex={v02 ? -1 : undefined}
@@ -177,7 +217,12 @@ export function Landing({ version }: { version: "base" | "v02" }) {
           </section>
         </section>
 
-        {v02 ? <FichaProgramaV02 /> : <div>
+        {v02 ? (
+          <>
+            <FichaProgramaV02 />
+            <FranjaInscripcion conEnlace />
+          </>
+        ) : <div>
           <img
             alt=""
             src="/landing/Vector-1.png"
@@ -211,9 +256,7 @@ export function Landing({ version }: { version: "base" | "v02" }) {
           </section>
         )}
 
-        {v02 ? (
-          <BeneficiosV02 tipo="institucion" />
-        ) : (
+        {!v02 && (
           <section id="por-que-uniminuto" className="seccion-caracteristicas">
             <h2 className="titulo-iconos">¿Por qué UNIMINUTO?</h2>
             <div className="contenedor-iconos">
@@ -296,15 +339,30 @@ export function Landing({ version }: { version: "base" | "v02" }) {
         )}
 
         <section id="lo-que-seras" className="seccion-lo-que-seras">
+          {v02 && (
+            <div className="fondo-perfil-campana" aria-hidden="true">
+              <Image
+                src="/landing/fondo-perfil-gerencia-v02.png"
+                alt=""
+                fill
+                sizes="100vw"
+                className="object-cover object-center max-sm:object-[20%_center]"
+              />
+            </div>
+          )}
           <div className="contenedor-imagen">
-            <img
-              src="/landing/imagen-lo-que-seras.png"
-              alt="Fondo decorativo"
-              className="imagen-fondo"
-            />
+            {!v02 && (
+              <img
+                src="/landing/imagen-lo-que-seras.png"
+                alt="Fondo decorativo"
+                className="imagen-fondo"
+              />
+            )}
 
             <div className="contenido-superior">
-              <h2 className="titulo-imagen">Lo que serás</h2>
+              <h2 className="titulo-imagen">
+                {v02 ? "Qué podrás hacer al graduarte" : "Lo que serás"}
+              </h2>
               <p className="texto-imagen">
                 Domina las etapas para crear y ejecutar un proyecto ganador
               </p>
@@ -325,17 +383,29 @@ export function Landing({ version }: { version: "base" | "v02" }) {
               </div>
               <div className="imagen-card">
                 {" "}
-                <img
-                  src="/landing/imagen-cards.png"
-                  alt="Imagen relacionada"
-                />{" "}
+                {v02 ? (
+                  <Image
+                    src="/landing/perfil-gerencia-v02.png"
+                    alt="Una gerente de proyectos revisa el cronograma y los recursos con su equipo."
+                    fill
+                    sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1000px) 48vw, 470px"
+                  />
+                ) : (
+                  <img
+                    src="/landing/imagen-cards.png"
+                    alt="Imagen relacionada"
+                  />
+                )}{" "}
               </div>
             </div>
           </div>
         </section>
 
         {v02 ? (
-          <BeneficiosV02 tipo="programa" />
+          <>
+            <BeneficiosV02 tipo="programa" />
+            <ProgramaV02 />
+          </>
         ) : (
           <section className="seccion-por-que">
             <h2 className="titulo-por-que">
@@ -406,199 +476,173 @@ export function Landing({ version }: { version: "base" | "v02" }) {
           </section>
         )}
 
-        <section id="dinero" className="dinero">
+        <section id="dinero" className={v02 ? "dinero relative isolate" : "dinero"}>
+          {v02 && (
+            <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+              <Image
+                src="/landing/fondo-financiacion-v02.png"
+                alt=""
+                fill
+                sizes="100vw"
+                className="object-cover object-bottom max-sm:object-[76%_bottom]"
+              />
+              <div className="absolute inset-0 bg-[#050c22]/35" />
+            </div>
+          )}
           <h2>Estudiar sin que el dinero sea un problema</h2>
           <p>
-            Subsidios, aliados estratégicos y descuentos adicionales: todo para
-            que puedas comenzar sin que el dinero sea un obstáculo.
+            {v02
+              ? "Conoce el subsidio de matrícula y las opciones de financiación para iniciar tu maestría."
+              : "Subsidios, aliados estratégicos y descuentos adicionales: todo para que puedas comenzar sin que el dinero sea un obstáculo."}
           </p>
           <div className="contenedor-dinero">
-            <div className="item-dinero">
-              <h3>Matrícula con precio subsidiado</h3>
-              <p>
-                Desde tu primer semestre accedes a un{" "}
-                <span className="font-semibold">
-                  valor de matrícula reducido gracias al subsidio que otorga
-                  UNIMINUTO
-                </span>{" "}
-                según tu sede y situación socioeconómica.
-              </p>
-            </div>
-            <div className="item-dinero">
-              <h3>Financiación con condiciones preferenciales</h3>
-              <p>
-                <span className="font-semibold">
-                  Tenemos convenios con aliados como Cooperativa Minuto de Dios
-                  y Fincomercio
-                </span>{" "}
-                que te ofrecen facilidades de pago pensadas para estudiantes
-                UNIMINUTO
-              </p>
-            </div>
-            <div className="item-dinero">
-              <h3>Podrías acceder a descuentos adicionales</h3>
-              <p>
-                <span className="font-semibold">
-                  Dependiendo de tu perfil, puedes aplicar a beneficios o
-                  convenios{" "}
-                </span>
-                institucionales especiales que te ayudan a pagar aún menos.
-              </p>
-            </div>
-          </div>
-          <div className="boton-contenedor-dinero">
-            {" "}
             {v02 ? (
-              <a className="boton-dinero" href="#formPrograma">
-                Solicitar información
-              </a>
+              <MatriculaSubsidiadaV02 />
             ) : (
-              <span className="boton-dinero">Quiero más información</span>
-            )}{" "}
+              <div className="item-dinero">
+                <h3>Matrícula con precio subsidiado</h3>
+                <p>
+                  Desde tu primer semestre accedes a un{" "}
+                  <span className="font-semibold">
+                    valor de matrícula reducido gracias al subsidio que otorga
+                    UNIMINUTO
+                  </span>{" "}
+                  según tu sede y situación socioeconómica.
+                </p>
+              </div>
+            )}
+            {v02 ? (
+              <div className="item-dinero flex flex-col justify-center">
+                <h3>Financiación de hasta el 100 % de tus estudios</h3>
+                <p>
+                  Tenemos convenios con aliados como{" "}
+                  <strong>Cooperativa Minuto de Dios y Fincomercio</strong>{" "}
+                  que te ofrecen facilidades de pago.
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className="item-dinero">
+                  <h3>Financiación con condiciones preferenciales</h3>
+                  <p>
+                    <span className="font-semibold">
+                      Tenemos convenios con aliados como Cooperativa Minuto de
+                      Dios y Fincomercio
+                    </span>{" "}
+                    que te ofrecen facilidades de pago pensadas para estudiantes
+                    UNIMINUTO
+                  </p>
+                </div>
+                <div className="item-dinero">
+                  <h3>Podrías acceder a descuentos adicionales</h3>
+                  <p>
+                    <span className="font-semibold">
+                      Dependiendo de tu perfil, puedes aplicar a beneficios o
+                      convenios{" "}
+                    </span>
+                    institucionales especiales que te ayudan a pagar aún menos.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
+          {!v02 && (
+            <div className="boton-contenedor-dinero">
+              {" "}
+              <span className="boton-dinero">Quiero más información</span>{" "}
+            </div>
+          )}
         </section>
 
-        <section
-          id={v02 ? "plan-de-estudios" : undefined}
-          tabIndex={v02 ? -1 : undefined}
-          className={v02 ? "seccion-plan scroll-mt-5" : "seccion-plan"}
-        >
-          <div className="columna-plan-izquierda">
-            <h2 className="titulo-plan">Conoce tu plan de estudios</h2>
-            <p className="parrafo-plan">
-              Explora un programa diseñado para la ejecución efectiva de grandes
-              ideas.{v02 && " "}
-              <span className="font-semibold">
-                Estudiarás liderazgo, gestión de riesgos, metodologías ágiles,
-                finanzas y dirección de equipos.
-              </span>{" "}
-              Desde el inicio, te formarás en lo que realmente hace que un
-              proyecto avance.
-            </p>
-            <div className="boton-contenedor-plan">
-              {" "}
-              {v02 ? (
-                <a
-                  className="boton-plan"
-                  href={planDeEstudios}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Abrir plan de estudios (PDF)
-                </a>
-              ) : (
-                <span className="boton-plan">Plan de estudios</span>
-              )}{" "}
-            </div>
-          </div>
+        {v02 ? <BeneficiosV02 tipo="institucion" /> : <PlanDeEstudiosBase />}
 
-          <div className="columna-derecha-plan">
-            <img
-              width="100%"
-              src="/landing/imagen-plan-estudios.png"
-              alt="Imagen principal"
-            />
-          </div>
-        </section>
-
-        <section
-          id="linea-tiempo"
-          className={v02 ? "linea-tiempo scroll-mt-5" : "linea-tiempo"}
-          tabIndex={v02 ? -1 : undefined}
-        >
-          <div className="linea-tiempo__contenido">
-            <h2 className="linea-tiempo__titulo-seccion">
-              Así de fácil es empezar a estudiar con nosotros
-            </h2>
-            <p className="linea-tiempo__parrafo-seccion">
-              {" "}
-              <span className="font-semibold">
-                El proceso de inscripción a UNIMINUTO es 100% virtual, gratuito
-                y muy sencillo.
-              </span>
-              <br />
-              Desde el primer momento te acompañamos para que empieces tu
-              carrera sin enredos.{" "}
-            </p>
-            <div className="linea-tiempo__contenedor-columnas">
-              <div className="linea-tiempo__columna">
-                <div className="linea-tiempo__encabezado">
-                  {" "}
-                  <span className="linea-tiempo__circulo">1</span>{" "}
-                  <span className="linea-tiempo__raya"></span>{" "}
+        {!v02 && (
+          <section id="linea-tiempo" className="linea-tiempo">
+            <div className="linea-tiempo__contenido">
+              <h2 className="linea-tiempo__titulo-seccion">
+                Así de fácil es empezar a estudiar con nosotros
+              </h2>
+              <p className="linea-tiempo__parrafo-seccion">
+                {" "}
+                <span className="font-semibold">
+                  El proceso de inscripción a UNIMINUTO es 100% virtual, gratuito
+                  y muy sencillo.
+                </span>
+                <br />
+                Desde el primer momento te acompañamos para que empieces tu
+                carrera sin enredos.{" "}
+              </p>
+              <div className="linea-tiempo__contenedor-columnas">
+                <div className="linea-tiempo__columna">
+                  <div className="linea-tiempo__encabezado">
+                    {" "}
+                    <span className="linea-tiempo__circulo">1</span>{" "}
+                    <span className="linea-tiempo__raya"></span>{" "}
+                  </div>
+                  <h3 className="linea-tiempo__titulo-columna">
+                    Regístrate como aspirante
+                  </h3>
+                  <p className="linea-tiempo__texto-columna">
+                    {" "}
+                    Deja tus datos en nuestra plataforma de admisiones y crea tu
+                    cuenta. Este es el primer paso para empezar tu camino
+                    profesional.{" "}
+                  </p>
                 </div>
-                <h3 className="linea-tiempo__titulo-columna">
-                  Regístrate como aspirante
-                </h3>
-                <p className="linea-tiempo__texto-columna">
-                  {" "}
-                  Deja tus datos en nuestra plataforma de admisiones y crea tu
-                  cuenta. Este es el primer paso para empezar tu camino
-                  profesional.{" "}
-                </p>
-              </div>
-              <div className="linea-tiempo__columna">
-                <div className="linea-tiempo__encabezado">
-                  {" "}
-                  <span className="linea-tiempo__circulo">2</span>{" "}
-                  <span className="linea-tiempo__raya"></span>{" "}
+                <div className="linea-tiempo__columna">
+                  <div className="linea-tiempo__encabezado">
+                    {" "}
+                    <span className="linea-tiempo__circulo">2</span>{" "}
+                    <span className="linea-tiempo__raya"></span>{" "}
+                  </div>
+                  <h3 className="linea-tiempo__titulo-columna">
+                    Sube tus documentos
+                  </h3>
+                  <p className="linea-tiempo__texto-columna">
+                    {" "}
+                    Diligencia el formulario y carga los documentos necesarios
+                    para que podamos admitir tu ingreso.{" "}
+                  </p>
                 </div>
-                <h3 className="linea-tiempo__titulo-columna">
-                  Sube tus documentos
-                </h3>
-                <p className="linea-tiempo__texto-columna">
-                  {" "}
-                  Diligencia el formulario y carga los documentos necesarios
-                  para que podamos admitir tu ingreso.{" "}
-                </p>
-              </div>
-              <div className="linea-tiempo__columna">
-                <div className="linea-tiempo__encabezado">
-                  {" "}
-                  <span className="linea-tiempo__circulo">3</span>{" "}
-                  <span className="linea-tiempo__raya"></span>{" "}
+                <div className="linea-tiempo__columna">
+                  <div className="linea-tiempo__encabezado">
+                    {" "}
+                    <span className="linea-tiempo__circulo">3</span>{" "}
+                    <span className="linea-tiempo__raya"></span>{" "}
+                  </div>
+                  <h3 className="linea-tiempo__titulo-columna">
+                    Paga tu matrícula o accede a financiación
+                  </h3>
+                  <p className="linea-tiempo__texto-columna">
+                    {" "}
+                    Elige el método de pago que más te convenga: online, bancos
+                    autorizados o con ayuda de nuestros aliados financieros.{" "}
+                  </p>
                 </div>
-                <h3 className="linea-tiempo__titulo-columna">
-                  Paga tu matrícula o accede a financiación
-                </h3>
-                <p className="linea-tiempo__texto-columna">
-                  {" "}
-                  Elige el método de pago que más te convenga: online, bancos
-                  autorizados o con ayuda de nuestros aliados financieros.{" "}
-                </p>
-              </div>
-              <div className="linea-tiempo__columna">
-                <div className="linea-tiempo__encabezado">
-                  {" "}
-                  <span className="linea-tiempo__circulo">4</span>{" "}
-                  <span className="linea-tiempo__raya"></span>{" "}
+                <div className="linea-tiempo__columna">
+                  <div className="linea-tiempo__encabezado">
+                    {" "}
+                    <span className="linea-tiempo__circulo">4</span>{" "}
+                    <span className="linea-tiempo__raya"></span>{" "}
+                  </div>
+                  <h3 className="linea-tiempo__titulo-columna">
+                    ¡Ya eres parte de UNIMINUTO
+                  </h3>
+                  <p className="linea-tiempo__texto-columna">
+                    {" "}
+                    Después de completar tu matrícula, estarás listo para comenzar
+                    tus clases. Así de rápido y sin complicaciones.{" "}
+                  </p>
                 </div>
-                <h3 className="linea-tiempo__titulo-columna">
-                  ¡Ya eres parte de UNIMINUTO
-                </h3>
-                <p className="linea-tiempo__texto-columna">
-                  {" "}
-                  Después de completar tu matrícula, estarás listo para comenzar
-                  tus clases. Así de rápido y sin complicaciones.{" "}
-                </p>
               </div>
-            </div>
-            <div className="linea-tiempo__contenedor-boton">
-              {v02 ? (
-                <a
-                  className="linea-tiempo__boton inline-block"
-                  href="#formPrograma"
-                >
-                  Solicitar información
-                </a>
-              ) : (
+              <div className="linea-tiempo__contenedor-boton">
                 <button type="button" disabled className="linea-tiempo__boton">
                   Comienza tu camino
-                </button>
-              )}{" "}
+                </button>{" "}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="testimoniales">
           <div className="testimoniales__contenido">
@@ -639,14 +683,23 @@ export function Landing({ version }: { version: "base" | "v02" }) {
                     Como mamá, trabajadora y cabeza de familia, siempre me
                     enfrenté al reto de encontrar tiempo para todo. Pero
                     UNIMINUTO me brindó la flexibilidad que necesitaba con sus
-                    horarios flexibles, lo que me permitió estudiar sin poner en
-                    pausa mi rol en casa o en el trabajo. Además, no solo me
-                    ayudaron a superar las barreras financieras con sus
-                    subsidios y alivios, sino que me dieron la oportunidad de
+                    horarios flexibles, lo que me permitió{" "}
+                    <EnfasisTestimonio>
+                      estudiar sin poner en pausa mi rol en casa o en el trabajo
+                    </EnfasisTestimonio>
+                    . Además, no solo me ayudaron a{" "}
+                    <EnfasisTestimonio>
+                      superar las barreras financieras con sus subsidios y
+                      alivios
+                    </EnfasisTestimonio>
+                    , sino que me dieron la oportunidad de
                     soñar y crecer. No se trataba solo de obtener un título,
                     sino de desarrollar mi potencial y construir un futuro mejor
-                    para mí y mi familia. Uniminuto me abrió las puertas a
-                    nuevas oportunidades laborales, me permitió estudiar sin
+                    para mí y mi familia. Uniminuto me abrió las puertas a{" "}
+                    <EnfasisTestimonio>
+                      nuevas oportunidades laborales
+                    </EnfasisTestimonio>
+                    , me permitió estudiar sin
                     afectar mi situación financiera y, lo más importante, me
                     ayudó a creer en mí misma y en mis sueños. 
                     <br />
@@ -735,18 +788,10 @@ export function Landing({ version }: { version: "base" | "v02" }) {
             <br />
             CORPORACIÓN UNIVERSITARIA MINUTO DE DIOS
           </p>
-          {v02 && (
-            <a
-              href="#inicio"
-              className="mt-3 inline-flex min-h-11 items-center px-3 text-sm font-semibold underline underline-offset-4"
-            >
-              Volver arriba
-            </a>
-          )}
         </div>
       </footer>
 
-      {!v02 && (
+      {v02 ? <AccionesFlotantesV02 /> : (
         <div className="back-to-top">
           <img src="/landing/back-to-top.svg" width="40" alt="" />
         </div>

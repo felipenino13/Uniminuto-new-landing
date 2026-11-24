@@ -26,7 +26,7 @@
 
 .landing-v02 :is(
   .beneficios-campana h2, .titulo-imagen, .dinero h2,
-  .titulo-plan, .linea-tiempo__titulo-seccion, .testimoniales__titulo-seccion,
+  .testimoniales__titulo-seccion,
   .titulo-formacion
 ) {
   font-size: var(--titulo-campana);
@@ -36,16 +36,12 @@
   text-wrap: balance;
 }
 
-.landing-v02 :is(.seccion-plan, .linea-tiempo, .testimoniales, .beneficios-campana) {
+.landing-v02 :is(.testimoniales, .beneficios-campana) {
   color: var(--tinta-campana);
 }
 
 .landing-v02 .beneficios-campana {
   padding: clamp(2.5rem, 5vw, 4rem) var(--margen-campana);
-  background: radial-gradient(ellipse at 90% 100%, #dceaff, transparent 66%), #f2f7ff;
-}
-
-.landing-v02 .beneficios-campana[id="beneficios-del-programa"] {
   background: #fff;
 }
 
@@ -72,23 +68,30 @@
 }
 
 .landing-v02 .seccion-lo-que-seras {
+  position: relative;
+  bottom: auto;
+  isolation: isolate;
   padding-bottom: var(--espacio-campana);
+}
+
+.landing-v02 .fondo-perfil-campana {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.landing-v02 .fondo-perfil-campana::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, #050c2233, transparent 42%, #050c2290);
 }
 
 .landing-v02 .contenedor-imagen {
   display: grid;
   place-items: center;
   height: auto;
-  min-height: clamp(12.5rem, 22vw, 17rem);
-  padding: 2.5rem 1.25rem 3.75rem;
-}
-
-.landing-v02 .contenedor-imagen::after {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  content: "";
-  background: linear-gradient(0deg, #08162f, #091936b8 70%);
+  padding: clamp(2.5rem, 4vw, 3.5rem) 1.25rem 1.5rem;
 }
 
 .landing-v02 .contenido-superior {
@@ -111,7 +114,7 @@
   width: min(calc(100% - 2.5rem), 960px);
   position: relative;
   z-index: 2;
-  margin: -1.25rem auto 0;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -134,9 +137,11 @@
 }
 
 .landing-v02 .imagen-card {
+  position: relative;
+  align-self: center;
   width: 100%;
   height: auto;
-  min-height: 13rem;
+  aspect-ratio: 16 / 9;
 }
 
 .landing-v02 .dinero {
@@ -152,7 +157,7 @@
 
 .landing-v02 .contenedor-dinero {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   padding-top: 1.75rem;
 }
@@ -175,7 +180,7 @@
   color: #e1edff;
 }
 
-.landing-v02 :is(.boton-dinero, .linea-tiempo__boton, .boton-formacion-campana, .boton-plan) {
+.landing-v02 .boton-formacion-campana {
   display: inline-flex;
   min-height: 2.75rem;
   height: auto;
@@ -187,117 +192,18 @@
   border-radius: .5rem;
   font-weight: 700;
   text-align: center;
-}
-
-.landing-v02 :is(.boton-dinero, .linea-tiempo__boton, .boton-formacion-campana) {
   background: var(--amarillo-campana);
   color: var(--tinta-campana);
 }
 
-.landing-v02 :is(.boton-dinero, .linea-tiempo__boton, .boton-formacion-campana):hover {
+.landing-v02 .boton-formacion-campana:hover {
   background: #ffe677;
 }
 
-.landing-v02 .seccion-plan {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: center;
-  gap: clamp(1.25rem, 4vw, 3rem);
-  margin: 0;
-  padding: var(--espacio-campana) var(--margen-campana);
-  background: #f8faff;
-}
-
-.landing-v02 :is(.columna-plan-izquierda, .columna-derecha-plan, .columna-formacion-izquierda, .columna-derecha-formacion) {
+.landing-v02 :is(.columna-formacion-izquierda, .columna-derecha-formacion) {
   width: 100%;
   min-width: 0;
   margin: 0;
-}
-
-.landing-v02 .parrafo-plan {
-  margin: 0;
-  padding: 0;
-  color: var(--texto-campana);
-  line-height: 1.65;
-}
-
-.landing-v02 .columna-derecha-plan {
-  max-width: none;
-  overflow: hidden;
-  border: 1px solid var(--borde-campana);
-  border-radius: 1.25rem;
-  background: radial-gradient(ellipse at 67% 66%, #b9d8ff, #e0ecff 60%, #f0f6ff);
-}
-
-.landing-v02 .columna-derecha-plan img {
-  width: 100%;
-  max-height: 21rem;
-  object-fit: contain;
-}
-
-.landing-v02 .boton-plan {
-  background: var(--tinta-campana);
-}
-
-.landing-v02 .boton-plan:hover {
-  background: var(--azul-campana);
-}
-
-.landing-v02 .linea-tiempo {
-  padding: var(--espacio-campana) var(--margen-campana);
-  background: linear-gradient(155deg, #edf5ff, #e3efff);
-}
-
-.landing-v02 .linea-tiempo__parrafo-seccion {
-  color: var(--texto-campana);
-  line-height: 1.55;
-}
-
-.landing-v02 .linea-tiempo__contenedor-columnas {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .8rem;
-  margin: 1.5rem 0 0;
-  padding: 0;
-}
-
-.landing-v02 .linea-tiempo__columna {
-  margin: 0;
-  padding: 1.15rem;
-  border: 1px solid var(--borde-campana);
-  border-radius: 1rem;
-  background: #fff;
-}
-
-.landing-v02 .linea-tiempo__encabezado {
-  justify-content: flex-start;
-  margin-bottom: .75rem;
-}
-
-.landing-v02 .linea-tiempo__circulo {
-  width: 2rem;
-  height: 2rem;
-  border-radius: .5rem;
-  background: var(--azul-campana);
-  font-size: .95rem;
-}
-
-.landing-v02 .linea-tiempo__raya {
-  display: none;
-}
-
-.landing-v02 :is(.linea-tiempo__titulo-columna, .linea-tiempo__texto-columna) {
-  padding-right: 0;
-}
-
-.landing-v02 .linea-tiempo__titulo-columna {
-  color: var(--tinta-campana);
-  font-size: 1.0625rem;
-}
-
-.landing-v02 .linea-tiempo__texto-columna {
-  padding-top: .5rem;
-  color: var(--texto-campana);
 }
 
 .landing-v02 .testimoniales {
@@ -377,31 +283,15 @@
   color: #c5d6ef;
 }
 
-.landing-v02 .footer__copy a {
-  color: #f4f8ff;
-}
-
 @media (max-width: 900px) {
-  .landing-v02 .linea-tiempo__contenedor-columnas {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .landing-v02 .item-dinero {
     padding: 1.125rem;
   }
 }
 
 @media (max-width: 640px) {
-  .landing-v02 :is(.cardUNI, .contenedor-dinero, .seccion-plan, .linea-tiempo__contenedor-columnas, .seccion-formacion) {
+  .landing-v02 :is(.cardUNI, .contenedor-dinero, .seccion-formacion) {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .landing-v02 .imagen-card img {
-    max-height: 16rem;
-  }
-
-  .landing-v02 .columna-derecha-plan img {
-    max-height: 16rem;
   }
 
   .landing-v02 .columna-derecha-formacion {

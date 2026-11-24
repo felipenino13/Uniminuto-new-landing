@@ -1,8 +1,12 @@
+import Image from "next/image";
+
+export const anchoContenidoV02 = "w-full max-w-[1520px] px-5 min-[1200px]:px-8";
+
 const enlaces = [
-  { href: "#por-que-uniminuto", texto: "¿Por qué UNIMINUTO?" },
-  { href: "#lo-que-seras", texto: "Lo que serás" },
+  { href: "#lo-que-seras", texto: "Perfil de egreso" },
   { href: "#plan-de-estudios", texto: "Plan de estudios" },
   { href: "#linea-tiempo", texto: "Proceso de inscripción" },
+  { href: "#por-que-uniminuto", texto: "¿Por qué UNIMINUTO?" },
 ];
 
 const programa = {
@@ -11,27 +15,62 @@ const programa = {
   creditos: "42 créditos",
   snies: "118026",
   matricula: "$5.801.700",
+  precioOficial: "$7.583.800",
+  subsidio: "23,5 %",
 };
 
 const datosDelPrograma = [
   { icono: "laptop", texto: "100 % virtual" },
   { icono: "calendar", texto: programa.duracion },
-  { icono: "book", texto: programa.creditos },
 ];
 
 const fichaDelPrograma = [
   { etiqueta: "Créditos académicos", valor: `${programa.creditos} académicos`, icono: "book" },
   { etiqueta: "Duración", valor: `${programa.duracion} de duración`, icono: "calendar" },
-  { etiqueta: "Código SNIES", valor: `SNIES ${programa.snies}`, icono: "shield" },
+  {
+    etiqueta: "Código SNIES",
+    valor: `SNIES ${programa.snies}`,
+    icono: "shield",
+    detalle: [
+      "Resolución 11548 del 11/06/2025",
+      "Vigencia del registro: 7 años",
+    ],
+  },
 ];
+
+export function MatriculaSubsidiadaV02() {
+  return (
+    <article className="flex min-w-0 flex-col items-center justify-center rounded-2xl border border-[#ffe986] bg-linear-to-br from-[#ffe45b] to-[#ffc928] px-4 py-6 text-center text-[#09152e] shadow-[0_12px_30px_#02081750] sm:px-5">
+      <p className="rounded-full bg-[#09152e]/10 px-3 py-1 text-xs font-bold tracking-wide uppercase">
+        Subsidio del {programa.subsidio}
+      </p>
+      <h3 className="mt-3 text-base leading-tight font-bold">
+        Matrícula con subsidio
+      </h3>
+      <p className="mt-1 text-[clamp(1.75rem,3vw,2.75rem)] leading-none font-extrabold tracking-tight tabular-nums">
+        {programa.matricula}
+      </p>
+      <p className="mt-1 text-xs font-medium">Por periodo académico</p>
+      <p className="mt-3 text-sm leading-snug">
+        Valor oficial: <s className="font-semibold">{programa.precioOficial}</s>
+      </p>
+      <a href="#formPrograma" className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-[#09152e] px-4 py-2 text-sm font-bold text-white hover:bg-[#17355c]">
+        Solicitar información
+      </a>
+      <p className="mt-2 text-xs leading-snug">
+        Subsidio sujeto a condiciones de UNIMINUTO.
+      </p>
+    </article>
+  );
+}
 
 export function FichaProgramaV02() {
   return (
     <section
       aria-labelledby="ficha-programa"
-      className="border-b border-[#cbdcf2] bg-white px-5 py-7 text-[#09152e] sm:px-8 sm:py-9"
+      className="border-b border-[#cbdcf2] bg-white py-7 text-[#09152e] sm:py-9"
     >
-      <div className="mx-auto grid max-w-[1300px] items-center gap-5 lg:grid-cols-[1.25fr_3.75fr]">
+      <div className={`mx-auto grid items-center gap-5 lg:grid-cols-[1.25fr_3.75fr] ${anchoContenidoV02}`}>
         <div>
           <p className="text-xs font-bold tracking-wide text-[#334866] uppercase">
             Información general
@@ -41,12 +80,17 @@ export function FichaProgramaV02() {
           </h2>
         </div>
         <dl className="grid grid-cols-2 gap-y-4 sm:grid-cols-4">
-          {fichaDelPrograma.map(({ etiqueta, valor, icono }) => (
+          {fichaDelPrograma.map(({ etiqueta, valor, icono, detalle }) => (
             <div key={etiqueta} className="border-l border-[#cbdcf2] px-3 lg:px-4">
               <dt className="sr-only">{etiqueta}</dt>
               <dd className="flex flex-col items-start gap-2 text-sm font-bold">
                 <i className={`fas fa-${icono} text-lg text-[#114fa9]`} aria-hidden="true" />
                 {valor}
+                {detalle && (
+                  <div className="space-y-1 text-xs leading-relaxed font-normal text-[#334866]">
+                    {detalle.map((linea) => <p key={linea}>{linea}</p>)}
+                  </div>
+                )}
               </dd>
             </div>
           ))}
@@ -66,7 +110,7 @@ export function FichaProgramaV02() {
 
 export function CabeceraProgramaV02() {
   return (
-    <div className="columna-izquierda-banner max-[800px]:pb-6 min-[1200px]:ml-0 min-[1200px]:w-full min-[1200px]:min-w-0 min-[1200px]:pb-0">
+    <div className="columna-izquierda-banner ml-0 max-[800px]:pb-6 min-[1200px]:w-full min-[1200px]:min-w-0 min-[1200px]:pb-0">
       <p className="mb-3 font-mono text-xs font-semibold tracking-[0.16em] text-[#ffdd33] uppercase">
         Este minuto cuenta.
       </p>
@@ -87,12 +131,12 @@ export function CabeceraProgramaV02() {
           {programa.matricula}
         </p>
         <p className="mt-1 text-sm text-white/85">
-          Antes del subsidio: $7.583.800{" "}
+          Antes del subsidio: {programa.precioOficial}{" "}
           <span className="block font-bold text-[#ffdd33] min-[410px]:inline">
             <span className="hidden min-[410px]:inline" aria-hidden="true">
               ·{" "}
             </span>
-            Subsidio del 23,5 %
+            Subsidio del {programa.subsidio}
           </span>
         </p>
       </div>
@@ -104,8 +148,6 @@ export function CabeceraProgramaV02() {
           Área de conocimiento: economía, administración, finanzas y afines.
         </p>
         <p>SNIES {programa.snies}</p>
-        <p>Registro calificado: Resolución 11548 del 11/06/2025</p>
-        <p>Vigencia del registro: 7 años</p>
       </div>
     </div>
   );
@@ -143,7 +185,7 @@ const beneficios = {
   },
   programa: {
     id: "beneficios-del-programa",
-    titulo: "¿Por qué estudiar Gerencia de Proyectos?",
+    titulo: "Lo que aprenderás",
     items: [
       {
         icono: "heartbeat",
@@ -235,6 +277,7 @@ function AccesosV02() {
 
 export function BeneficiosV02({ tipo }: { tipo: keyof typeof beneficios }) {
   const { id, titulo, items } = beneficios[tipo];
+  const aprendizaje = tipo === "programa";
 
   return (
     <section
@@ -243,20 +286,33 @@ export function BeneficiosV02({ tipo }: { tipo: keyof typeof beneficios }) {
       className="beneficios-campana scroll-mt-5"
     >
       <div className="mx-auto max-w-[1100px]">
-        <h2>{titulo}</h2>
-        <ul className="mt-7 grid list-none gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map(({ icono, titulo, texto }) => (
-            <li key={titulo} className="ventaja-campana grid grid-cols-[2.5rem_1fr] items-start gap-3 p-4 lg:grid-cols-1 lg:p-5">
-              <div className="icono-campana grid size-10 place-items-center rounded-lg">
-                <i className={`fas fa-${icono}`} aria-hidden="true" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold">{titulo}</h3>
-                <p className="mt-1 text-sm leading-relaxed">{texto}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <h2 className="text-center">{titulo}</h2>
+        <div className={aprendizaje ? "mt-7 grid gap-5 md:grid-cols-[1fr_0.92fr] lg:gap-7" : "mt-7"}>
+          <ul className={`grid list-none ${aprendizaje ? "gap-2 md:auto-rows-fr" : "gap-3 sm:grid-cols-2 lg:grid-cols-4"}`}>
+            {items.map(({ icono, titulo, texto }) => (
+              <li key={titulo} className={`ventaja-campana grid grid-cols-[2.5rem_1fr] gap-3 ${aprendizaje ? "items-center px-4 py-2.5" : "items-start p-4 lg:grid-cols-1 lg:p-5"}`}>
+                <div className="icono-campana grid size-10 place-items-center rounded-lg">
+                  <i className={`fas fa-${icono}`} aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold">{titulo}</h3>
+                  <p className="mt-1 text-sm leading-relaxed">{texto}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          {aprendizaje && (
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[#cbdcf2] bg-[#09152e] md:aspect-auto md:min-h-[22.5rem]">
+              <Image
+                src="/landing/aprendizaje-gerencia-oficina-v02.png"
+                alt="Una coordinadora y su equipo revisan el presupuesto y el cronograma de un proyecto en la oficina."
+                fill
+                sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1140px) 46vw, 514px"
+                className="object-cover object-center"
+              />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export const anchoContenidoV02 = "w-full max-w-[1520px] px-5 min-[1200px]:px-8";
 
 const enlaces = [
@@ -11,26 +9,20 @@ const enlaces = [
 
 const programa = {
   nombre: "Gerencia de Proyectos",
-  duracion: "4 semestres",
-  creditos: "42 créditos",
+  duracion: 4,
+  creditos: 42,
   snies: "118026",
   matricula: "$5.801.700",
   precioOficial: "$7.583.800",
   subsidio: "23,5 %",
 };
 
-const datosDelPrograma = [
-  { icono: "laptop", texto: "100 % virtual" },
-  { icono: "calendar", texto: programa.duracion },
-];
-
 const fichaDelPrograma = [
-  { etiqueta: "Créditos académicos", valor: `${programa.creditos} académicos`, icono: "book" },
-  { etiqueta: "Duración", valor: `${programa.duracion} de duración`, icono: "calendar" },
+  { etiqueta: "Créditos académicos", cifra: programa.creditos, valor: "créditos académicos" },
+  { etiqueta: "Duración", cifra: programa.duracion, valor: "semestres de duración" },
   {
     etiqueta: "Código SNIES",
     valor: `SNIES ${programa.snies}`,
-    icono: "shield",
     detalle: [
       "Resolución 11548 del 11/06/2025",
       "Vigencia del registro: 7 años",
@@ -67,43 +59,34 @@ export function MatriculaSubsidiadaV02() {
 export function FichaProgramaV02() {
   return (
     <section
-      aria-labelledby="ficha-programa"
+      aria-label="Información general del programa"
       className="border-b border-[#cbdcf2] bg-white py-7 text-[#09152e] sm:py-9"
     >
-      <div className={`mx-auto grid items-center gap-5 lg:grid-cols-[1.25fr_3.75fr] ${anchoContenidoV02}`}>
-        <div>
-          <p className="text-xs font-bold tracking-wide text-[#334866] uppercase">
-            Información general
-          </p>
-          <h2 id="ficha-programa" className="mt-2 max-w-[23ch] text-xl leading-tight font-extrabold tracking-tight sm:text-2xl">
-            Maestría en {programa.nombre}
-          </h2>
-        </div>
-        <dl className="grid grid-cols-2 gap-y-4 sm:grid-cols-4">
-          {fichaDelPrograma.map(({ etiqueta, valor, icono, detalle }) => (
-            <div key={etiqueta} className="border-l border-[#cbdcf2] px-3 lg:px-4">
-              <dt className="sr-only">{etiqueta}</dt>
-              <dd className="flex flex-col items-start gap-2 text-sm font-bold">
-                <i className={`fas fa-${icono} text-lg text-[#114fa9]`} aria-hidden="true" />
-                {valor}
-                {detalle && (
-                  <div className="space-y-1 text-xs leading-relaxed font-normal text-[#334866]">
-                    {detalle.map((linea) => <p key={linea}>{linea}</p>)}
-                  </div>
-                )}
-              </dd>
-            </div>
-          ))}
-          <div className="flex flex-col justify-center gap-1 border-l border-[#cbdcf2] px-3 lg:px-4">
-            <dt className="text-xs font-medium text-[#334866]">
-              Matrícula con subsidio
-            </dt>
-            <dd className="text-xl leading-tight font-extrabold tracking-tight text-[#114fa9] sm:text-2xl">
-              {programa.matricula}
+      <dl className={`mx-auto grid gap-y-3 md:grid-cols-3 ${anchoContenidoV02}`}>
+        {fichaDelPrograma.map(({ etiqueta, cifra, valor, detalle }) => (
+          <div
+            key={etiqueta}
+            className="border-[#cbdcf2] max-md:not-first:border-t max-md:not-first:pt-3 md:not-first:border-l md:not-first:pl-3 lg:not-first:pl-4"
+          >
+            <dt className="sr-only">{etiqueta}</dt>
+            <dd className="flex h-full flex-col justify-center gap-2 text-sm font-bold">
+              <span className="flex items-baseline gap-2">
+                {cifra && (
+                  <span className="text-4xl leading-none font-extrabold tracking-tight tabular-nums text-[#114fa9] lg:text-5xl">
+                    {cifra}
+                  </span>
+                )}{" "}
+                <span>{valor}</span>
+              </span>
+              {detalle && (
+                <div className="space-y-1 text-xs leading-relaxed font-normal text-[#334866]">
+                  {detalle.map((linea) => <p key={linea}>{linea}</p>)}
+                </div>
+              )}
             </dd>
           </div>
-        </dl>
-      </div>
+        ))}
+      </dl>
     </section>
   );
 }
@@ -111,9 +94,6 @@ export function FichaProgramaV02() {
 export function CabeceraProgramaV02() {
   return (
     <div className="columna-izquierda-banner ml-0 max-[800px]:pb-6 min-[1200px]:w-full min-[1200px]:min-w-0 min-[1200px]:pb-0">
-      <p className="mb-3 font-mono text-xs font-semibold tracking-[0.16em] text-[#ffdd33] uppercase">
-        Este minuto cuenta.
-      </p>
       <h1>
         <span className="block text-base font-semibold text-blue-100 sm:text-xl">
           Maestría en
@@ -122,33 +102,32 @@ export function CabeceraProgramaV02() {
           {programa.nombre}
         </span>
       </h1>
+      <p className="mt-3 flex w-fit items-center gap-1.5 rounded-full border border-blue-200/25 bg-blue-100/8 px-2 py-1 text-xs font-semibold text-blue-50 min-[410px]:px-2.5">
+        <i className="fas fa-laptop text-blue-200" aria-hidden="true" />
+        100 % virtual
+      </p>
       <p className="mt-3 text-base leading-snug text-blue-50/90 sm:text-lg">
-        Lidera equipos y gestiona proyectos de principio a fin.
+        Prepárate para gerenciar
       </p>
       <div className="mt-5 mb-4">
         <p className="text-sm font-semibold">Matrícula con subsidio</p>
-        <p className="text-[28px] leading-tight font-bold text-white">
-          {programa.matricula}
-        </p>
-        <p className="mt-1 text-sm text-white/85">
-          Antes del subsidio: {programa.precioOficial}{" "}
-          <span className="block font-bold text-[#ffdd33] min-[410px]:inline">
-            <span className="hidden min-[410px]:inline" aria-hidden="true">
-              ·{" "}
-            </span>
-            Subsidio del {programa.subsidio}
+        <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <span className="text-[28px] leading-tight font-bold text-white">
+            {programa.matricula}
           </span>
+          <span className="rounded bg-[#d5002d] px-2 py-0.5 text-sm font-bold whitespace-nowrap text-white">
+            <span className="sr-only">Subsidio del </span>
+            <span aria-hidden="true">−</span>
+            {programa.subsidio}
+          </span>
+        </p>
+        <p className="mt-1 text-sm text-white/70">
+          <span className="sr-only">Antes del subsidio: </span>
+          <s>{programa.precioOficial}</s>
         </p>
       </div>
 
       <AccesosV02 />
-
-      <div className="space-y-1 text-xs leading-relaxed text-white/85">
-        <p>
-          Área de conocimiento: economía, administración, finanzas y afines.
-        </p>
-        <p>SNIES {programa.snies}</p>
-      </div>
     </div>
   );
 }
@@ -253,31 +232,19 @@ export function NavegacionV02() {
 
 function AccesosV02() {
   return (
-    <div className="mb-5 max-w-xl text-sm">
+    <div className="max-w-xl text-sm">
       <a
         href="#formPrograma"
         className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#ffdd33] px-4 font-bold text-[#07142e] shadow-[0_6px_24px_#ffdd3330] hover:bg-[#ffe677]"
       >
         Solicitar información
       </a>
-      <ul aria-label="Datos del programa" className="mt-3 flex list-none flex-wrap gap-1.5 min-[410px]:gap-2">
-        {datosDelPrograma.map(({ icono, texto }) => (
-          <li
-            key={texto}
-            className="inline-flex items-center gap-1.5 rounded-full border border-blue-200/25 bg-blue-100/8 px-2 py-1 text-xs font-semibold text-blue-50 min-[410px]:px-2.5"
-          >
-            <i className={`fas fa-${icono} text-blue-200`} aria-hidden="true" />
-            {texto}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
 
 export function BeneficiosV02({ tipo }: { tipo: keyof typeof beneficios }) {
   const { id, titulo, items } = beneficios[tipo];
-  const aprendizaje = tipo === "programa";
 
   return (
     <section
@@ -287,32 +254,22 @@ export function BeneficiosV02({ tipo }: { tipo: keyof typeof beneficios }) {
     >
       <div className="mx-auto max-w-[1100px]">
         <h2 className="text-center">{titulo}</h2>
-        <div className={aprendizaje ? "mt-7 grid gap-5 md:grid-cols-[1fr_0.92fr] lg:gap-7" : "mt-7"}>
-          <ul className={`grid list-none ${aprendizaje ? "gap-2 md:auto-rows-fr" : "gap-3 sm:grid-cols-2 lg:grid-cols-4"}`}>
-            {items.map(({ icono, titulo, texto }) => (
-              <li key={titulo} className={`ventaja-campana grid grid-cols-[2.5rem_1fr] gap-3 ${aprendizaje ? "items-center px-4 py-2.5" : "items-start p-4 lg:grid-cols-1 lg:p-5"}`}>
-                <div className="icono-campana grid size-10 place-items-center rounded-lg">
-                  <i className={`fas fa-${icono}`} aria-hidden="true" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold">{titulo}</h3>
-                  <p className="mt-1 text-sm leading-relaxed">{texto}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          {aprendizaje && (
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[#cbdcf2] bg-[#09152e] md:aspect-auto md:min-h-[22.5rem]">
-              <Image
-                src="/landing/aprendizaje-gerencia-oficina-v02.png"
-                alt="Una coordinadora y su equipo revisan el presupuesto y el cronograma de un proyecto en la oficina."
-                fill
-                sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1140px) 46vw, 514px"
-                className="object-cover object-center"
-              />
-            </div>
-          )}
-        </div>
+        <ul className="mt-7 grid list-none gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map(({ icono, titulo, texto }) => (
+            <li
+              key={titulo}
+              className="ventaja-campana grid grid-cols-[2.5rem_1fr] items-start gap-3 p-4 lg:grid-cols-1 lg:p-5"
+            >
+              <div className="icono-campana grid size-10 place-items-center rounded-lg">
+                <i className={`fas fa-${icono}`} aria-hidden="true" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold">{titulo}</h3>
+                <p className="mt-1 text-sm leading-relaxed">{texto}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

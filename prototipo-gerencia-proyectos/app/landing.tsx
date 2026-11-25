@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Fragment } from "react";
 import { Formulario } from "./components/formulario";
 import { ProgramaV02 } from "./components/programa-v02";
 import { AccionesFlotantesV02 } from "./components/acciones-flotantes-v02";
@@ -13,6 +12,27 @@ import {
 } from "./components/contenido-v02";
 
 const imagenCampana = "/landing/imagen-programa-campana.png";
+
+const testimoniosV02 = [
+  {
+    nombre: "Génesis Piñeros",
+    imagen: "/landing/imagen-testominio.png",
+    texto: "UNIMINUTO me brindó la flexibilidad que necesitaba con sus horarios flexibles, lo que me permitió",
+    destacado: "estudiar sin poner en pausa mi rol en casa o en el trabajo",
+  },
+  {
+    nombre: "Valeria Rojas",
+    imagen: "/landing/testimonio-ficticio-valeria-v02.webp",
+    texto: "Antes organizaba los proyectos sobre la marcha. Aprender a planear cada etapa me ayudó a",
+    destacado: "detectar riesgos antes de que se convirtieran en problemas",
+  },
+  {
+    nombre: "Diego Salazar",
+    imagen: "/landing/testimonio-ficticio-diego-v02.webp",
+    texto: "Empecé a llevar indicadores a las reuniones con mi equipo. Ahora podemos",
+    destacado: "decidir qué ajustar con datos y hacer seguimiento a los acuerdos",
+  },
+];
 
 function FranjaInscripcion({ conEnlace = false }: { conEnlace?: boolean }) {
   const llamado = "inscríbete hoy y da un paso hacia el futuro!";
@@ -69,7 +89,6 @@ function PlanDeEstudiosBase() {
 
 export function Landing({ version }: { version: "base" | "v02" }) {
   const v02 = version === "v02";
-  const EnfasisTestimonio = v02 ? "b" : Fragment;
   return (
     <>
       {!v02 && <FranjaInscripcion />}
@@ -180,12 +199,12 @@ export function Landing({ version }: { version: "base" | "v02" }) {
             )}
             {v02 && (
               <div className="pointer-events-none relative hidden self-stretch min-[1200px]:block">
-                <div className="imagen-cabecera-campana absolute -inset-y-5 -right-16 -left-4 overflow-hidden">
+                <div className="imagen-cabecera-campana absolute -inset-y-12 -right-16 -left-[clamp(2.5rem,5vw,5rem)] origin-right scale-120 overflow-hidden">
                   <Image
                     src={imagenCampana}
                     alt=""
                     fill
-                    sizes="(max-width: 1199px) 1px, (min-width: 1520px) 420px, 30vw"
+                    sizes="(max-width: 1199px) 1px, (min-width: 1520px) 576px, 40vw"
                     loading="eager"
                     className="object-cover object-center"
                   />
@@ -649,76 +668,101 @@ export function Landing({ version }: { version: "base" | "v02" }) {
             <h2 className="testimoniales__titulo-seccion">
               Nuestros estudiantes opinan
             </h2>
-            <div className="testimoniales__slider">
-              <button
-                type="button"
-                disabled
-                className="testimoniales__flecha testimoniales__flecha--izquierda"
-                aria-label="Testimonio anterior"
-              >
-                &#10094;
-              </button>
-              <div className="testimoniales__tarjetas">
-                <div className="testimoniales__tarjeta activa">
-                  <div className="testimoniales__encabezado">
-                    <div className="testimoniales__imagen">
+            {v02 ? (
+              <div className="mx-auto mt-7 grid max-w-[1100px] gap-4 lg:grid-cols-3">
+                {testimoniosV02.map(({ nombre, imagen, texto, destacado }) => (
+                  <figure key={nombre} className="testimoniales__tarjetas flex min-w-0 flex-col px-6 pt-5 pb-6">
+                    <span aria-hidden="true" className="block h-10 w-fit font-serif text-7xl leading-none text-[#114fa9]">
+                      “
+                    </span>
+                    <blockquote className="mb-5 text-base leading-relaxed text-[#334866]">
+                      <p>
+                        {texto}{" "}
+                        <strong className="font-bold text-[#09152e]">{destacado}</strong>.
+                      </p>
+                    </blockquote>
+                    <figcaption className="mt-auto flex items-center gap-3 border-t border-[#cbdcf2] pt-4">
                       <img
-                        width="100%"
-                        src="/landing/imagen-testominio.png"
+                        src={imagen}
                         alt=""
+                        width={48}
+                        height={48}
+                        loading="lazy"
+                        className="size-12 shrink-0 rounded-full object-cover"
                       />
-                    </div>
-                    <div className="testimoniales__info">
-                      <h3 className="testimoniales__nombre">
-                        Génesis Piñeros{" "}
-                      </h3>
-                      <p className="testimoniales__campo">
-                        Estudiar en UNIMINUTO Virtual fue un viaje
-                        transformador. 
+                      <p className="font-bold text-[#09152e]">{nombre}</p>
+                      <span aria-hidden="true" className="ml-auto h-8 font-serif text-5xl leading-none text-[#114fa9]/25">
+                        ”
+                      </span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <>
+                <div className="testimoniales__slider">
+                  <button
+                    type="button"
+                    disabled
+                    className="testimoniales__flecha testimoniales__flecha--izquierda"
+                    aria-label="Testimonio anterior"
+                  >
+                    &#10094;
+                  </button>
+                  <div className="testimoniales__tarjetas">
+                    <div className="testimoniales__tarjeta activa">
+                      <div className="testimoniales__encabezado">
+                        <div className="testimoniales__imagen">
+                          <img
+                            width="100%"
+                            src="/landing/imagen-testominio.png"
+                            alt=""
+                          />
+                        </div>
+                        <div className="testimoniales__info">
+                          <h3 className="testimoniales__nombre">
+                            Génesis Piñeros{" "}
+                          </h3>
+                          <p className="testimoniales__campo">
+                            Estudiar en UNIMINUTO Virtual fue un viaje
+                            transformador. 
+                          </p>
+                        </div>
+                      </div>
+                      <p className="testimoniales__descripcion">
+                        {" "}
+                        Como mamá, trabajadora y cabeza de familia, siempre me
+                        enfrenté al reto de encontrar tiempo para todo. Pero
+                        UNIMINUTO me brindó la flexibilidad que necesitaba con sus
+                        horarios flexibles, lo que me permitió estudiar sin poner en
+                        pausa mi rol en casa o en el trabajo. Además, no solo me
+                        ayudaron a superar las barreras financieras con sus
+                        subsidios y alivios, sino que me dieron la oportunidad de
+                        soñar y crecer. No se trataba solo de obtener un título,
+                        sino de desarrollar mi potencial y construir un futuro mejor
+                        para mí y mi familia. Uniminuto me abrió las puertas a
+                        nuevas oportunidades laborales, me permitió estudiar sin
+                        afectar mi situación financiera y, lo más importante, me
+                        ayudó a creer en mí misma y en mis sueños. 
+                        <br />
+                        <br />
+                        Hoy, gracias a ellos, soy la profesional que
+                        siempre quise ser.{" "}
                       </p>
                     </div>
                   </div>
-                  <p className="testimoniales__descripcion">
-                    {" "}
-                    Como mamá, trabajadora y cabeza de familia, siempre me
-                    enfrenté al reto de encontrar tiempo para todo. Pero
-                    UNIMINUTO me brindó la flexibilidad que necesitaba con sus
-                    horarios flexibles, lo que me permitió{" "}
-                    <EnfasisTestimonio>
-                      estudiar sin poner en pausa mi rol en casa o en el trabajo
-                    </EnfasisTestimonio>
-                    . Además, no solo me ayudaron a{" "}
-                    <EnfasisTestimonio>
-                      superar las barreras financieras con sus subsidios y
-                      alivios
-                    </EnfasisTestimonio>
-                    , sino que me dieron la oportunidad de
-                    soñar y crecer. No se trataba solo de obtener un título,
-                    sino de desarrollar mi potencial y construir un futuro mejor
-                    para mí y mi familia. Uniminuto me abrió las puertas a{" "}
-                    <EnfasisTestimonio>
-                      nuevas oportunidades laborales
-                    </EnfasisTestimonio>
-                    , me permitió estudiar sin
-                    afectar mi situación financiera y, lo más importante, me
-                    ayudó a creer en mí misma y en mis sueños. 
-                    <br />
-                    <br />
-                    Hoy, gracias a ellos, soy la profesional que
-                    siempre quise ser.{" "}
-                  </p>
+                  <button
+                    type="button"
+                    disabled
+                    className="testimoniales__flecha testimoniales__flecha--derecha"
+                    aria-label="Testimonio siguiente"
+                  >
+                    &#10095;
+                  </button>
                 </div>
-              </div>
-              <button
-                type="button"
-                disabled
-                className="testimoniales__flecha testimoniales__flecha--derecha"
-                aria-label="Testimonio siguiente"
-              >
-                &#10095;
-              </button>
-            </div>
-            <div className="testimoniales__puntos"></div>
+                <div className="testimoniales__puntos"></div>
+              </>
+            )}
           </div>
         </section>
 

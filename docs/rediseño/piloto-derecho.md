@@ -1,0 +1,13 @@
+# Piloto V02 · Derecho Virtual
+
+La ruta local `/derecho` prueba la plantilla V02 con un pregrado. Conserva el orden de los bloques, el formulario en el hero y la navegación. El mensaje parte de una tarea del futuro abogado, analizar casos y fundamentar decisiones, y se apoya en los contenidos del plan. [Código del piloto](../../prototipo-gerencia-proyectos/app/derecho/page.tsx) · [Guía de comunicación](guia-de-comunicacion.md) · [Guía UX](guia-de-diseno-ux.md)
+
+## Decisiones de la adaptación
+
+- Se muestran 10 semestres, 149 créditos, modalidad virtual y SNIES 118023. La ficha oficial y la landing anterior muestran $2.882.700 con subsidio y $5.130.000 de valor oficial. El 45 % anunciado en la landing anterior no coincide con esos importes. El piloto usa los importes como referencia y omite el porcentaje. Confirmar vigencia, unidad del cobro y condiciones antes de publicar. [Ficha oficial](https://www.uniminuto.edu/oferta-academica/programa/derecho) · [Landing anterior](https://uvd.uniminuto.edu/boletin/derecho/)
+- El enlace al plan usa el PDF de Derecho Virtual que enlaza la ficha oficial. La landing anterior apunta al plan de otro programa. [Plan de estudios](https://www.uniminuto.edu/sites/default/files/programas/2026-02/Plan-de-estudios-Derecho-2.pdf)
+- La imagen del plan ilustra una audiencia simulada para distinguir la práctica de argumentación de la revisión de casos que muestra la foto del perfil de egreso. [Imagen del plan](../../prototipo-gerencia-proyectos/public/landing/derecho/plan-estudios.webp)
+- El hero usa la pieza original de Derecho del key visual de «Estudia Ahora», exportada a WebP a su resolución nativa de 2664 × 1990 px. La imagen de apoyo se generó para el piloto. [Dirección visual](guia-de-direccion-visual.md) · [Recursos del piloto](../../prototipo-gerencia-proyectos/public/landing/derecho/)
+- Derecho muestra tres testimonios ficticios con retratos generados, identificados en la sección como material de vista previa. Reemplazar citas, nombres y retratos por material real autorizado antes de publicar. [Contenido de Derecho](../../prototipo-gerencia-proyectos/app/derecho/contenido.ts) · [Guía de comunicación](guia-de-comunicacion.md)
+- Formación adicional reutiliza íntegramente el bloque de V02. La diferencia entre «más de 5.000» en el texto y «+1.000» en la pieza sigue pendiente de validación. [Componente compartido](../../prototipo-gerencia-proyectos/app/components/formacion-adicional.tsx)
+- El formulario es una maqueta deshabilitada. Para publicar, integrar el formulario común, confirmar el valor de Derecho en RD Station y comprobar con un registro de prueba la llegada al CRM y la redirección a la página de agradecimiento. [Protocolo de revisión y medición](protocolo-de-revision-y-medicion.md)

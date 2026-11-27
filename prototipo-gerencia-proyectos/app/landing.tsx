@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { TestimoniosV02 } from "./components/testimonios-v02";
+import { FormacionAdicional } from "./components/formacion-adicional";
 import { Formulario } from "./components/formulario";
 import { ProgramaV02 } from "./components/programa-v02";
 import { AccionesFlotantesV02 } from "./components/acciones-flotantes-v02";
@@ -669,35 +671,7 @@ export function Landing({ version }: { version: "base" | "v02" }) {
               Nuestros estudiantes opinan
             </h2>
             {v02 ? (
-              <div className="mx-auto mt-7 grid max-w-[1100px] gap-4 lg:grid-cols-3">
-                {testimoniosV02.map(({ nombre, imagen, texto, destacado }) => (
-                  <figure key={nombre} className="testimoniales__tarjetas flex min-w-0 flex-col px-6 pt-5 pb-6">
-                    <span aria-hidden="true" className="block h-10 w-fit font-serif text-7xl leading-none text-[#114fa9]">
-                      “
-                    </span>
-                    <blockquote className="mb-5 text-base leading-relaxed text-[#334866]">
-                      <p>
-                        {texto}{" "}
-                        <strong className="font-bold text-[#09152e]">{destacado}</strong>.
-                      </p>
-                    </blockquote>
-                    <figcaption className="mt-auto flex items-center gap-3 border-t border-[#cbdcf2] pt-4">
-                      <img
-                        src={imagen}
-                        alt=""
-                        width={48}
-                        height={48}
-                        loading="lazy"
-                        className="size-12 shrink-0 rounded-full object-cover"
-                      />
-                      <p className="font-bold text-[#09152e]">{nombre}</p>
-                      <span aria-hidden="true" className="ml-auto h-8 font-serif text-5xl leading-none text-[#114fa9]/25">
-                        ”
-                      </span>
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
+              <TestimoniosV02 testimonios={testimoniosV02} />
             ) : (
               <>
                 <div className="testimoniales__slider">
@@ -766,63 +740,7 @@ export function Landing({ version }: { version: "base" | "v02" }) {
           </div>
         </section>
 
-        <section className={v02 ? "seccion-formacion relative isolate" : "seccion-formacion"}>
-          {v02 && (
-            <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-              <Image
-                src="/landing/fondo-formacion-v02.png"
-                alt=""
-                fill
-                sizes="100vw"
-                className="object-cover object-right"
-              />
-              <div className="absolute inset-0 bg-[#050c22]/25 max-sm:bg-[#050c22]/55" />
-            </div>
-          )}
-          <div className="columna-formacion-izquierda">
-            <h2 className="titulo-formacion">
-              Formación recargada, para que vayas más allá
-            </h2>
-            <p className="parrafo-formacion">
-              Acceso exclusivo a más de 5.000 cursos certificados
-              <br />
-              <br />
-              <span className="font-normal">
-                Al matricularte, recibirás acceso durante 4 meses a una
-                plataforma de formación adicional donde podrás aprender de
-                manera virtual sobre temas como
-              </span>{" "}
-              marketing digital, liderazgo,{" "}
-              <span className="font-normal">
-                diseño, innovación, negocios y mucho más. A tu ritmo. A tu
-                manera. Desde cualquier lugar.
-              </span>
-              <br />
-              <br />
-              Este beneficio viene incluido con tu matrícula. ¡Una oportunidad
-              única para potenciar tu perfil profesional desde el día uno!
-            </p>
-            <div className="boton-formacion">
-              {v02 ? (
-                <a href="#formPrograma" className="boton-formacion-campana">
-                  Solicitar información
-                </a>
-              ) : (
-                <button type="button" disabled>
-                  Quiero más información
-                </button>
-              )}{" "}
-            </div>
-          </div>
-
-          <div className="columna-derecha-formacion">
-            <img
-              src="/landing/imagen-formacion.png"
-              alt="Imagen principal"
-              width="100%"
-            />
-          </div>
-        </section>
+        <FormacionAdicional v02={v02} />
       </main>
       <footer className="footer">
         <div className="footer__franja">

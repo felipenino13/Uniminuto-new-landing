@@ -46,7 +46,7 @@ export function Formulario() {
   return (
     <section
       aria-labelledby="solicita-informacion"
-      className="rounded-lg bg-[#c3cee0] px-5 py-4 text-[#212844]"
+      className="superficie-campana rounded-lg bg-[#c3cee0] px-5 py-4 text-[#212844]"
     >
       <h2 id="solicita-informacion" className="text-center text-xl font-bold">
         Solicita más información

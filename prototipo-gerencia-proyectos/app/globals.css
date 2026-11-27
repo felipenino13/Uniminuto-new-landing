@@ -3,6 +3,10 @@
 @import "./landing-original.css" layer(legacy);
 @import "./campana-v02.css" layer(components);
 
+.landing-derecho :is(.superficie-campana, .ventaja-campana, .cardUNI, .item-dinero, .testimoniales__tarjetas) {
+  border-radius: 0;
+}
+
 @font-face {
   font-family: Montserrat;
   src: url("/landing/montserrat.woff2") format("woff2");

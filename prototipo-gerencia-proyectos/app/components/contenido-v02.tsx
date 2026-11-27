@@ -15,36 +15,45 @@ const programa = {
   matricula: "$5.801.700",
   precioOficial: "$7.583.800",
   subsidio: "23,5 %",
+  nivel: "Maestría en",
+  mensaje: "Prepárate para gerenciar",
+  resolucion: "11548 del 11/06/2025",
+  vigencia: "7 años",
 };
 
-const fichaDelPrograma = [
-  { etiqueta: "Créditos académicos", cifra: programa.creditos, valor: "créditos académicos" },
-  { etiqueta: "Duración", cifra: programa.duracion, valor: "semestres de duración" },
-  {
-    etiqueta: "Código SNIES",
-    valor: `SNIES ${programa.snies}`,
-    detalle: [
-      "Resolución 11548 del 11/06/2025",
-      "Vigencia del registro: 7 años",
-    ],
-  },
-];
+export type OfertaV02 = Omit<typeof programa, "subsidio"> & { subsidio?: string };
 
-export function MatriculaSubsidiadaV02() {
+export function FichaProgramaV02({ oferta = programa, integrada = false }: { oferta?: OfertaV02; integrada?: boolean }) {
+  const fichaDelPrograma = [
+    { etiqueta: "Créditos académicos", cifra: oferta.creditos, valor: "créditos académicos" },
+    { etiqueta: "Duración", cifra: oferta.duracion, valor: "semestres de duración" },
+    {
+      etiqueta: "Código SNIES",
+      valor: `SNIES ${oferta.snies}`,
+      detalle: [
+        `Resolución ${oferta.resolucion}`,
+        `Vigencia del registro: ${oferta.vigencia}`,
+      ],
+    },
+  ];
+  return <FichaAcademica datos={fichaDelPrograma} integrada={integrada} />;
+}
+
+export function MatriculaSubsidiadaV02({ oferta = programa, periodo = "Por periodo académico" }: { oferta?: OfertaV02; periodo?: string }) {
   return (
-    <article className="flex min-w-0 flex-col items-center justify-center rounded-2xl border border-[#ffe986] bg-linear-to-br from-[#ffe45b] to-[#ffc928] px-4 py-6 text-center text-[#09152e] shadow-[0_12px_30px_#02081750] sm:px-5">
-      <p className="rounded-full bg-[#09152e]/10 px-3 py-1 text-xs font-bold tracking-wide uppercase">
-        Subsidio del {programa.subsidio}
-      </p>
+    <article className="flex min-w-0 flex-col items-center justify-center superficie-campana rounded-2xl border border-[#ffe986] bg-linear-to-br from-[#ffe45b] to-[#ffc928] px-4 py-6 text-center text-[#09152e] shadow-[0_12px_30px_#02081750] sm:px-5">
+      {oferta.subsidio && <p className="rounded-full bg-[#09152e]/10 px-3 py-1 text-xs font-bold tracking-wide uppercase">
+        Subsidio del {oferta.subsidio}
+      </p>}
       <h3 className="mt-3 text-base leading-tight font-bold">
         Matrícula con subsidio
       </h3>
       <p className="mt-1 text-[clamp(1.75rem,3vw,2.75rem)] leading-none font-extrabold tracking-tight tabular-nums">
-        {programa.matricula}
+        {oferta.matricula}
       </p>
-      <p className="mt-1 text-xs font-medium">Por periodo académico</p>
+      {periodo && <p className="mt-1 text-xs font-medium">{periodo}</p>}
       <p className="mt-3 text-sm leading-snug">
-        Valor oficial: <s className="font-semibold">{programa.precioOficial}</s>
+        Valor oficial: <s className="font-semibold">{oferta.precioOficial}</s>
       </p>
       <a href="#formPrograma" className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-[#09152e] px-4 py-2 text-sm font-bold text-white hover:bg-[#17355c]">
         Solicitar información
@@ -56,30 +65,30 @@ export function MatriculaSubsidiadaV02() {
   );
 }
 
-export function FichaProgramaV02() {
+function FichaAcademica({ datos, integrada }: { datos: { etiqueta: string; cifra?: number; valor: string; detalle?: string[] }[]; integrada: boolean }) {
   return (
     <section
       aria-label="Información general del programa"
-      className="border-b border-[#cbdcf2] bg-white py-7 text-[#09152e] sm:py-9"
+      className={integrada ? "relative px-5 pb-7 text-white sm:pb-10" : "border-b border-[#cbdcf2] bg-white py-7 text-[#09152e] sm:py-9"}
     >
-      <dl className={`mx-auto grid gap-y-3 md:grid-cols-3 ${anchoContenidoV02}`}>
-        {fichaDelPrograma.map(({ etiqueta, cifra, valor, detalle }) => (
+      <dl className={integrada ? "mx-auto grid max-w-[960px] gap-3 md:grid-cols-3 md:gap-4" : `mx-auto grid gap-y-3 md:grid-cols-3 ${anchoContenidoV02}`}>
+        {datos.map(({ etiqueta, cifra, valor, detalle }) => (
           <div
             key={etiqueta}
-            className="border-[#cbdcf2] max-md:not-first:border-t max-md:not-first:pt-3 md:not-first:border-l md:not-first:pl-3 lg:not-first:pl-4"
+            className={integrada ? "border-t border-r border-blue-100/45 bg-[#050c22]/80 px-4 py-3 backdrop-blur-sm" : "border-[#cbdcf2] max-md:not-first:border-t max-md:not-first:pt-3 md:not-first:border-l md:not-first:pl-3 lg:not-first:pl-4"}
           >
             <dt className="sr-only">{etiqueta}</dt>
             <dd className="flex h-full flex-col justify-center gap-2 text-sm font-bold">
               <span className="flex items-baseline gap-2">
                 {cifra && (
-                  <span className="text-4xl leading-none font-extrabold tracking-tight tabular-nums text-[#114fa9] lg:text-5xl">
+                  <span className={`text-4xl leading-none font-extrabold tracking-tight tabular-nums lg:text-5xl ${integrada ? "text-white" : "text-[#114fa9]"}`}>
                     {cifra}
                   </span>
                 )}{" "}
                 <span>{valor}</span>
               </span>
               {detalle && (
-                <div className="space-y-1 text-xs leading-relaxed font-normal text-[#334866]">
+                <div className={`space-y-1 text-xs leading-relaxed font-normal ${integrada ? "text-blue-100" : "text-[#334866]"}`}>
                   {detalle.map((linea) => <p key={linea}>{linea}</p>)}
                 </div>
               )}
@@ -91,15 +100,18 @@ export function FichaProgramaV02() {
   );
 }
 
-export function CabeceraProgramaV02() {
+export function CabeceraProgramaV02({ oferta = programa, mostrarSello = false, notaPrecio }: { oferta?: OfertaV02; mostrarSello?: boolean; notaPrecio?: string }) {
   return (
     <div className="columna-izquierda-banner ml-0 max-[800px]:pb-6 min-[1200px]:w-full min-[1200px]:min-w-0 min-[1200px]:pb-0">
+      {mostrarSello && (
+        <img src="/landing/sello-estudia-ahora.svg" alt="Estudia Ahora" width={686} height={414} className="mb-2 hidden h-auto w-40 min-[1200px]:block" />
+      )}
       <h1>
         <span className="block text-base font-semibold text-blue-100 sm:text-xl">
-          Maestría en
+          {oferta.nivel}
         </span>{" "}
         <span className="mt-1 block text-[clamp(1.85rem,5.75vw,3.75rem)] leading-[1.06] font-extrabold tracking-[-0.045em] text-white min-[801px]:text-[clamp(2.5rem,3.6vw,3.75rem)]">
-          {programa.nombre}
+          {oferta.nombre}
         </span>
       </h1>
       <p className="mt-3 flex w-fit items-center gap-1.5 rounded-full border border-blue-200/25 bg-blue-100/8 px-2 py-1 text-xs font-semibold text-blue-50 min-[410px]:px-2.5">
@@ -107,24 +119,25 @@ export function CabeceraProgramaV02() {
         100 % virtual
       </p>
       <p className="mt-3 text-base leading-snug text-blue-50/90 sm:text-lg">
-        Prepárate para gerenciar
+        {oferta.mensaje}
       </p>
       <div className="mt-5 mb-4">
         <p className="text-sm font-semibold">Matrícula con subsidio</p>
         <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <span className="text-[28px] leading-tight font-bold text-white">
-            {programa.matricula}
+            {oferta.matricula}
           </span>
-          <span className="rounded bg-[#d5002d] px-2 py-0.5 text-sm font-bold whitespace-nowrap text-white">
+          {oferta.subsidio && <span className="rounded bg-[#d5002d] px-2 py-0.5 text-sm font-bold whitespace-nowrap text-white">
             <span className="sr-only">Subsidio del </span>
             <span aria-hidden="true">−</span>
-            {programa.subsidio}
-          </span>
+            {oferta.subsidio}
+          </span>}
         </p>
         <p className="mt-1 text-sm text-white/70">
           <span className="sr-only">Antes del subsidio: </span>
-          <s>{programa.precioOficial}</s>
+          <s>{oferta.precioOficial}</s>
         </p>
+        {notaPrecio && <p className="mt-1 text-xs text-blue-100">{notaPrecio}</p>}
       </div>
 
       <AccesosV02 />
@@ -243,7 +256,7 @@ function AccesosV02() {
   );
 }
 
-export function BeneficiosV02({ tipo }: { tipo: keyof typeof beneficios }) {
+export function BeneficiosV02({ tipo, contenido }: { tipo: keyof typeof beneficios; contenido?: typeof beneficios.programa.items }) {
   const { id, titulo, items } = beneficios[tipo];
 
   return (
@@ -255,7 +268,7 @@ export function BeneficiosV02({ tipo }: { tipo: keyof typeof beneficios }) {
       <div className="mx-auto max-w-[1100px]">
         <h2 className="text-center">{titulo}</h2>
         <ul className="mt-7 grid list-none gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map(({ icono, titulo, texto }) => (
+          {(contenido ?? items).map(({ icono, titulo, texto }) => (
             <li
               key={titulo}
               className="ventaja-campana grid grid-cols-[2.5rem_1fr] items-start gap-3 p-4 lg:grid-cols-1 lg:p-5"
